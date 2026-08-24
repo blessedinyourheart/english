@@ -2,6 +2,9 @@
 
 var choseSide = 1;
 var mainWindow = document.getElementById('main-word');
+// Глобальна змінна для словника
+var dictionary = {};
+
 mainWindow.onclick = function () {
     changeSideOfTheCard();
 }
@@ -26,8 +29,6 @@ function changeSideOfTheCard() {
     }
 }
 
-// ПЕРЕВЕРТАННЯ КАРТОЧОК
-
 // АКТИВНИЙ ФУТЕР
 
 const list = document.querySelectorAll(".list");
@@ -40,9 +41,7 @@ function activeLink() {
 list.forEach((item) =>
     item.addEventListener('click', activeLink));
 
-// АКТИВНИЙ ФУТЕР
-
-//ВИБІР РЕЖИМУ ТЕСТУВАННЯ
+// ВИБІР РЕЖИМУ ТЕСТУВАННЯ
 
 var testMode = 0;
 document.getElementById("mode_test").onclick = function () {
@@ -90,7 +89,6 @@ function choseMode(current) {
             document.getElementById("next-word").classList.add("hidden");
             testMode = 1;
             document.getElementById("canvas_test").classList.remove("hidden");
-        } else if (testMode == 1) {
         } else if (testMode == 2) {
             document.getElementById("canvas_test_couple").classList.add("hidden");
             testMode = 1;
@@ -104,7 +102,7 @@ function choseMode(current) {
             document.getElementById("next-word").classList.add("hidden");
             testMode = 1;
             document.getElementById("canvas_test").classList.remove("hidden");
-        } else {
+        } else if (testMode == 5) {
             document.getElementById("setting_menu").classList.add("hidden");
             testMode = 1;
             document.getElementById("canvas_test").classList.remove("hidden");
@@ -120,17 +118,17 @@ function choseMode(current) {
             testMode = 2;
             document.getElementById("main-word").classList.add("hidden");
             document.getElementById("canvas_test_couple").classList.remove("hidden");
-        } else if (testMode == 2) {
         } else if (testMode == 3) {
             document.getElementById("canvas_test_input").classList.add("hidden");
             testMode = 2;
+            document.getElementById("main-word").classList.add("hidden");
             document.getElementById("canvas_test_couple").classList.remove("hidden");
         } else if (testMode == 4) {
             document.getElementById("next-word").classList.add("hidden");
             testMode = 2;
             document.getElementById("main-word").classList.add("hidden");
             document.getElementById("canvas_test_couple").classList.remove("hidden");
-        } else {
+        } else if (testMode == 5) {
             document.getElementById("setting_menu").classList.add("hidden");
             testMode = 2;
             document.getElementById("main-word").classList.add("hidden");
@@ -149,21 +147,17 @@ function choseMode(current) {
             document.getElementById("canvas_test_couple").classList.add("hidden");
             testMode = 3;
             document.getElementById("canvas_test_input").classList.remove("hidden");
-        } else if (testMode == 3) {
         } else if (testMode == 4) {
             document.getElementById("next-word").classList.add("hidden");
             testMode = 3;
             document.getElementById("canvas_test_input").classList.remove("hidden");
-        } else {
+        } else if (testMode == 5) {
             document.getElementById("setting_menu").classList.add("hidden");
             testMode = 3;
             document.getElementById("canvas_test_input").classList.remove("hidden");
         }
     } else if (current == 4) {
-        if (testMode == 0) {
-            document.getElementById("next-word").classList.remove("hidden");
-            testMode = 4;
-        } else if (testMode == 1) {
+        if (testMode == 1) {
             document.getElementById("canvas_test").classList.add("hidden");
             testMode = 4;
             document.getElementById("next-word").classList.remove("hidden");
@@ -175,18 +169,14 @@ function choseMode(current) {
         } else if (testMode == 3) {
             document.getElementById("canvas_test_input").classList.add("hidden");
             testMode = 4;
-        } else if (testMode == 4) {
-        } else {
+            document.getElementById("next-word").classList.remove("hidden");
+        } else if (testMode == 5) {
             document.getElementById("setting_menu").classList.add("hidden");
             testMode = 4;
             document.getElementById("next-word").classList.remove("hidden");
         }
     } else if (current == 5) {
-        if (testMode == 0) {
-            document.getElementById("next-word").classList.remove("hidden");
-            testMode = 5;
-            document.getElementById("setting_menu").classList.remove("hidden");
-        } else if (testMode == 1) {
+        if (testMode == 1) {
             document.getElementById("canvas_test").classList.add("hidden");
             testMode = 5;
             document.getElementById("setting_menu").classList.remove("hidden");
@@ -202,40 +192,52 @@ function choseMode(current) {
             document.getElementById("next-word").classList.add("hidden");
             testMode = 5;
             document.getElementById("setting_menu").classList.remove("hidden");
-        } else {
         }
     }
 }
 
-//ВИБІР РЕЖИМУ ТЕСТУВАННЯ
-
-
-var dictionary = {
-    "assume": ["əˈsjuːm", ["припускати"]],
-"chuckles": ["ˈtʃʌkəlz", ["тихо сміятися", "посміюватися"]],
-"clean": ["kliːn", ["чистий"]],
-"crush": ["krʌʃ", ["закоханість", "симпатія"]],
-"factor": ["ˈfæktər", ["фактор", "чинник"]],
-"feel like": ["fiːl laɪk", ["хотіти", "мати бажання"]],
-"get": ["ɡɛt", ["ставати"]],
-"gotta": ["ˈɡɒtə", ["мусиш", "повинен"]],
-"hanger": ["ˈhæŋər", ["вішалка", "плечики"]],
-"honestly": ["ˈɒnɪstli", ["чесно", "чесно кажучи", "відверто"]],
-"horny": ["ˈhɔːrni", ["сексуально збуджений"]],
-"hungry": ["ˈhʌŋɡri", ["голодний"]],
-"intense": ["ɪnˈtɛns", ["сильний", "інтенсивний", "глибокий"]],
-"line": ["laɪn", ["заготовлена фраза", "підкат"]],
-"mean": ["miːn", ["мати на увазі"]],
-"on a roll": ["ɒn ə rəʊl", ["на хвилі успіху", "коли все вдається"]],
-"perform": ["pərˈfɔːrm", ["виступати", "виконувати", "справлятися"]],
-"scariest": ["ˈskeəriɪst", ["найстрашніший"]],
-"sophisticated": ["səˈfɪstɪkeɪtɪd", ["витончений", "складний", "досвідчений"]],
-"vulnerability": ["ˌvʌlnərəˈbɪləti", ["вразливість"]],
-"wooden": ["ˈwʊdən", ["дерев'яний"]]}
 var mainWord = "";
 var mainTranscription = "";
-var mainTranslate = "";
+var mainTranslate = [];
 let idVariants = ["var_one", "var_two", "var_three", "var_four"];
+
+// Функція асинхронного завантаження словника за шляхом
+async function loadDictionary(filePath) {
+    try {
+        let response = await fetch(filePath);
+        if (!response.ok) {
+            throw new Error(`Помилка завантаження файлу: ${response.statusText}`);
+        }
+        let data = await response.json();
+        
+        // Записуємо слова у глобальну змінну
+        dictionary = data.words;
+        console.log(`Словник "${data.title}" успішно завантажено!`);
+        
+        // Оновлюємо інтерфейс залежно від поточного активного режиму
+        nextWord();
+        if (testMode === 1) {
+            createVariantsForTest();
+        } else if (testMode === 2) {
+            placeWordsInBloks();
+        }
+    } catch (error) {
+        console.error("Не вдалося завантажити словник:", error);
+    }
+}
+
+// Слухач подій на зміну випадаючого списку (автоматично бере шлях з обраного option)
+document.getElementById("dictionary-select").addEventListener("change", function(event) {
+    loadDictionary(event.target.value);
+});
+
+// Завантажуємо словник за замовчуванням під час першого запуску (беремо значення першого опціона з HTML)
+window.addEventListener("DOMContentLoaded", () => {
+    let selectElement = document.getElementById("dictionary-select");
+    if (selectElement && selectElement.value) {
+        loadDictionary(selectElement.value);
+    }
+});
 
 document.getElementById("next-word").onclick = function () {
     document.getElementById("next-word").style.backgroundColor = "#42703C";
@@ -246,15 +248,15 @@ document.getElementById("next-word").onclick = function () {
 }
 
 function nextWord() {
-    if (Object.entries(dictionary).length !== 0) {
-        words = Object.keys(dictionary);
-        let randomIndex = Math.floor(Math.random() * words.length);
-        randomWord = words[randomIndex];
+    let keys = Object.keys(dictionary);
+    if (keys.length !== 0) {
+        let randomIndex = Math.floor(Math.random() * keys.length);
+        let randomWord = keys[randomIndex];
         document.getElementById("word").innerHTML = randomWord.toUpperCase();
 
         document.getElementById("transcription").innerHTML = dictionary[randomWord][0];
         let translate = "";
-        for (i = 0; i < dictionary[randomWord][1].length; i++) {
+        for (let i = 0; i < dictionary[randomWord][1].length; i++) {
             translate += dictionary[randomWord][1][i] + "<br>";
         }
         document.getElementById("word-translate").innerHTML = translate.toUpperCase();
@@ -269,39 +271,40 @@ function nextWord() {
 }
 
 let selectedVariant = '';
-
 var options = document.getElementsByClassName("option");
-for (var i = 0; i < options.length; i++) {
+
+for (let i = 0; i < options.length; i++) {
     options[i].addEventListener("click", handleOptionClick);
     options[i].style.backgroundColor = "var(--bgc_card)";
 }
 
-
 function handleOptionClick(event) {
     var selectedOption = event.target;
-    // Если выбранный вариант уже имеет выделение (фоновый цвет), снимаем его
-    if (selectedOption.style.backgroundColor === "lightblue") {
+    if (selectedOption.style.backgroundColor === "lightblue" || selectedOption.style.backgroundColor === "rgb(173, 216, 230)") {
         selectedOption.style.backgroundColor = "var(--bgc_card)";
         selectedVariant = '';
-        return; // Прерываем выполнение функции, чтобы не устанавливать новое выделение
+        return;
     }
-    // Сбросить стили всех вариантов ответа
-    for (var i = 0; i < options.length; i++) {
+    for (let i = 0; i < options.length; i++) {
         options[i].style.backgroundColor = "var(--bgc_card)";
     }
-    // Изменить стиль выбранного варианта ответа
     selectedOption.style.backgroundColor = "lightblue";
     selectedVariant = selectedOption;
 }
 
 function createVariantsForTest() {
+    let keys = Object.keys(dictionary);
+    if (keys.length === 0) return;
+
     let choseId = Math.floor(Math.random() * idVariants.length);
     document.getElementById(idVariants[choseId]).innerHTML = mainTranslate[Math.floor(Math.random() * mainTranslate.length)];
+    
     for (let i = 0; i < idVariants.length; i++) {
-        if (i == choseId) {
-            document.getElementById(idVariants[choseId]).innerHTML = mainTranslate[Math.floor(Math.random() * mainTranslate.length)];
-        } else {
-            document.getElementById(idVariants[i]).innerHTML = dictionary[Object.keys(dictionary)[Math.floor(Math.random() * Object.keys(dictionary).length)]][1][Math.floor(Math.random() * this.length)];
+        if (i !== choseId) {
+            let randomKey = keys[Math.floor(Math.random() * keys.length)];
+            let randomTransList = dictionary[randomKey][1];
+            let randomTrans = randomTransList[Math.floor(Math.random() * randomTransList.length)];
+            document.getElementById(idVariants[i]).innerHTML = randomTrans;
         }
     }
 }
@@ -311,81 +314,81 @@ document.getElementById("apply_variants").onclick = function () {
 }
 
 function checkVariant() {
-    if (selectedVariant == 0 || selectedVariant == '') {
-        console.log("Виберіть варінт для відповіді");
+    if (!selectedVariant) {
+        console.log("Виберіть варіант для відповіді");
+        return;
+    }
+    if (dictionary[mainWord][1].includes(selectedVariant.textContent)) {
+        document.getElementById(selectedVariant.id).classList.add('div-glow-true');
+        setTimeout(function () {
+            document.getElementById(selectedVariant.id).style.backgroundColor = "var(--bgc_card)";
+            document.getElementById(selectedVariant.id).classList.remove('div-glow-true');
+        }, 500);
+        setTimeout(function () {
+            nextWord();
+            createVariantsForTest();
+            selectedVariant = '';
+        }, 500);
     } else {
-        if (dictionary[mainWord][1].includes(selectedVariant.textContent)) {
-            document.getElementById(selectedVariant.id).classList.add('div-glow-true');
-            setTimeout(function () {
-                document.getElementById(selectedVariant.id).style.backgroundColor = "var(--bgc_card)";
-                document.getElementById(selectedVariant.id).classList.remove('div-glow-true');
-            }, 500);
-            setTimeout(function () {
-                nextWord();
-                createVariantsForTest();
-                selectedVariant = '';
-            }, 500);
-        } else {
-            document.getElementById(selectedVariant.id).classList.add('div-glow-wrong');
-            setTimeout(function () {
-                document.getElementById(selectedVariant.id).style.backgroundColor = "var(--bgc_card)";
-                document.getElementById(selectedVariant.id).classList.remove('div-glow-wrong');
-                selectedVariant = '';
-            }, 500);
-        }
+        document.getElementById(selectedVariant.id).classList.add('div-glow-wrong');
+        setTimeout(function () {
+            document.getElementById(selectedVariant.id).style.backgroundColor = "var(--bgc_card)";
+            document.getElementById(selectedVariant.id).classList.remove('div-glow-wrong');
+            selectedVariant = '';
+        }, 500);
     }
 }
 
-/* Поиск пары*/
+// РЕЖИМ: ПОШУК ПАРИ
 
 var coupleLeft = document.getElementsByClassName("couple_left");
 var coupleRight = document.getElementsByClassName("couple_right");
 var selectedLeftBlock = null;
 var selectedRightBlock = null;
+let selectedCouple = 0;
+let dictionaryFromFindCouple = {};
 
 function handleLeftVariant(event) {
     var selectedLeftVariant = event.target;
-    // Если выбранный вариант уже имеет выделение (фоновый цвет), снимаем его
-    if (selectedLeftVariant.style.backgroundColor === "lightblue") {
+    if (!selectedLeftVariant.textContent) return;
+
+    if (selectedLeftVariant.style.backgroundColor === "lightblue" || selectedLeftVariant.style.backgroundColor === "rgb(173, 216, 230)") {
         selectedLeftVariant.style.backgroundColor = "var(--bgc_card)";
-        return; // Прерываем выполнение функции, чтобы не устанавливать новое выделение
+        selectedLeftBlock = null;
+        return;
     }
-    // Сбросить стили всех вариантов ответа
-    for (var i = 0; i < coupleLeft.length; i++) {
+    for (let i = 0; i < coupleLeft.length; i++) {
         coupleLeft[i].style.backgroundColor = "var(--bgc_card)";
     }
-    // Изменить стиль выбранного варианта ответа
     selectedLeftVariant.style.backgroundColor = "lightblue";
     selectedLeftBlock = selectedLeftVariant;
-    if (selectedLeftBlock !== null && selectedRightBlock !== null){
+    if (selectedLeftBlock !== null && selectedRightBlock !== null) {
         handler();
     }
-
 }
 
 function handleRightVariant(event) {
     var selectedRightVariant = event.target;
-    // Если выбранный вариант уже имеет выделение (фоновый цвет), снимаем его
-    if (selectedRightVariant.style.backgroundColor === "lightblue") {
+    if (!selectedRightVariant.textContent) return;
+
+    if (selectedRightVariant.style.backgroundColor === "lightblue" || selectedRightVariant.style.backgroundColor === "rgb(173, 216, 230)") {
         selectedRightVariant.style.backgroundColor = "var(--bgc_card)";
-        return; // Прерываем выполнение функции, чтобы не устанавливать новое выделение
+        selectedRightBlock = null;
+        return;
     }
-    // Сбросить стили всех вариантов ответа
-    for (var i = 0; i < coupleRight.length; i++) {
+    for (let i = 0; i < coupleRight.length; i++) {
         coupleRight[i].style.backgroundColor = "var(--bgc_card)";
     }
-    // Изменить стиль выбранного варианта ответа
     selectedRightVariant.style.backgroundColor = "lightblue";
     selectedRightBlock = selectedRightVariant;
-    if (selectedLeftBlock !== null && selectedRightBlock !== null){
+    if (selectedLeftBlock !== null && selectedRightBlock !== null) {
         handler();
     }
 }
-let selectedCouple = 0;
 
 function handler() {
-    if (dictionary[selectedLeftBlock.textContent][1].includes(selectedRightBlock.textContent)) {
-        for (let i = 0; i < 5; i++) {
+    if (dictionary[selectedLeftBlock.textContent] && dictionary[selectedLeftBlock.textContent][1].includes(selectedRightBlock.textContent)) {
+        for (let i = 0; i < coupleLeft.length; i++) {
             if (coupleLeft[i].textContent == selectedLeftBlock.textContent) {
                 coupleLeft[i].innerHTML = "";
                 coupleLeft[i].style.backgroundColor = "var(--bgc_card)";
@@ -396,11 +399,17 @@ function handler() {
             }
         }
         selectedCouple += 1;
-        if (selectedCouple == 3) {
+        selectedLeftBlock = null;
+        selectedRightBlock = null;
+
+        if (selectedCouple >= coupleLeft.length) {
             checkEmptyBlocks();
-            selectedLeftBlock = null;
-            selectedRightBlock = null;
         }
+    } else {
+        if (selectedLeftBlock) selectedLeftBlock.style.backgroundColor = "var(--bgc_card)";
+        if (selectedRightBlock) selectedRightBlock.style.backgroundColor = "var(--bgc_card)";
+        selectedLeftBlock = null;
+        selectedRightBlock = null;
     }
 }
 
@@ -408,114 +417,115 @@ let listEmptyPositionLeft = [];
 let listEmptyPositionRight = [];
 let suffledListEmptyPositionRight = [];
 
-function checkEmptyBlocks(){
+function checkEmptyBlocks() {
     selectedCouple = 0;
     listEmptyPositionLeft = [];
     listEmptyPositionRight = [];
-    for (var i = 0; i < coupleLeft.length; i++) {
-        if (coupleLeft[i].textContent == ""){
+    for (let i = 0; i < coupleLeft.length; i++) {
+        if (coupleLeft[i].textContent == "") {
             listEmptyPositionLeft.push(i);
         }
     }
-    for (var i = 0; i < coupleRight.length; i++) {
-        if (coupleRight[i].textContent == ""){
+    for (let i = 0; i < coupleRight.length; i++) {
+        if (coupleRight[i].textContent == "") {
             listEmptyPositionRight.push(i);
         }
     }
     updateBlocks();
 }
 
-function updateBlocks(){
-    // Обновление блока английских слов (левая колонка)
-
-    // Проверяем какие слова уже есть в левой колонке и записываем их положение в кейсах словаря.
+function updateBlocks() {
     let positionOfExistingValue = [];
-    for (let q = 0; q < coupleLeft.length; q++){
-        if (coupleLeft[q].textContent !== ""){
-            positionOfExistingValue.push(Object.keys(dictionary).indexOf(coupleLeft[q].textContent));
+    let dictKeys = Object.keys(dictionary);
+
+    for (let q = 0; q < coupleLeft.length; q++) {
+        if (coupleLeft[q].textContent !== "") {
+            positionOfExistingValue.push(dictKeys.indexOf(coupleLeft[q].textContent));
         }
     }
-    // Проверяем есть ли значение в массиве positionOfExistingValue, если нету то добавляем это слово
-    for (let i = 0; i < listEmptyPositionLeft.length; i++){
-        let key = getRandomNumberNotInArray(positionOfExistingValue, Object.keys(dictionary).length);
+    
+    for (let i = 0; i < listEmptyPositionLeft.length; i++) {
+        let key = getRandomNumberNotInArray(positionOfExistingValue, dictKeys.length);
         positionOfExistingValue.push(key);
-        coupleLeft[listEmptyPositionLeft[i]].innerHTML = Object.keys(dictionary)[key];
+        coupleLeft[listEmptyPositionLeft[i]].innerHTML = dictKeys[key];
     }
-    // Запускаем Алгоритм Фишера Йетса для перемешивания массива
-    suffledListEmptyPositionRight = shuffle(listEmptyPositionRight);
+    
+    suffledListEmptyPositionRight = shuffle([...listEmptyPositionRight]);
 
-    // Обновляем украинские слова (в правой колонке).
-
-    for (let j = 0; j < listEmptyPositionRight.length; j++){
-        coupleRight[suffledListEmptyPositionRight[j]].innerHTML = dictionary[coupleLeft[listEmptyPositionLeft[j]].textContent][1][Math.floor(Math.random() * dictionary[coupleLeft[listEmptyPositionLeft[j]].textContent][1].length)];
+    for (let j = 0; j < listEmptyPositionRight.length; j++) {
+        let leftWord = coupleLeft[listEmptyPositionLeft[j]].textContent;
+        let transList = dictionary[leftWord][1];
+        let randomTrans = transList[Math.floor(Math.random() * transList.length)];
+        coupleRight[suffledListEmptyPositionRight[j]].innerHTML = randomTrans;
     }
 }
 
 function getRandomNumberNotInArray(array, lengthArray) {
     var randomNumber;
     do {
-      randomNumber = Math.floor(Math.random() * lengthArray); // Генерация случайного числа от 1 до 10
+        randomNumber = Math.floor(Math.random() * lengthArray);
     } while (array.includes(randomNumber));
-  
     return randomNumber;
-  }
+}
 
-// Алгоритм Фишера Йетса для перемешивания массива
 function shuffle(array) {
-    for (var i = array.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var temp = array[i];
-      array[i] = array[j];
-      array[j] = temp;
+    for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        let temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
     }
     return array;
-  }
-
-/* Написание алгоритма заполнения слов */
-
-let dictionaryFromFindCouple = {};
+}
 
 function createDictionaryFromFindCouple() {
-    // обновляем словарь и список
+    let dictKeys = Object.keys(dictionary);
     let arrayOfRandomIndex = [];
     dictionaryFromFindCouple = {};
-    // вибираем рандомно индексы с которых будет браться слова
-    while (arrayOfRandomIndex.length < 5) {
-        let randomValue = Math.floor(Math.random() * Object.keys(dictionary).length);
+
+    while (arrayOfRandomIndex.length < 5 && arrayOfRandomIndex.length < dictKeys.length) {
+        let randomValue = Math.floor(Math.random() * dictKeys.length);
         if (!arrayOfRandomIndex.includes(randomValue)) {
             arrayOfRandomIndex.push(randomValue);
         }
     }
-    // создаем словарь для поиска пары
-    for (var i = 0; i < arrayOfRandomIndex.length; i++) {
-        let key = Object.keys(dictionary)[arrayOfRandomIndex[i]];
+
+    for (let i = 0; i < arrayOfRandomIndex.length; i++) {
+        let key = dictKeys[arrayOfRandomIndex[i]];
         dictionaryFromFindCouple[key] = dictionary[key];
     }
 }
 
 function placeWordsInBloks() {
-
     createDictionaryFromFindCouple();
+    let dictKeys = Object.keys(dictionaryFromFindCouple);
 
-    for (var i = 0; i < coupleLeft.length; i++) {
+    for (let i = 0; i < coupleLeft.length; i++) {
+        coupleLeft[i].removeEventListener("click", handleLeftVariant);
         coupleLeft[i].addEventListener("click", handleLeftVariant);
         coupleLeft[i].style.backgroundColor = "var(--bgc_card)";
-        coupleLeft[i].innerHTML = Object.keys(dictionaryFromFindCouple)[i];
+        coupleLeft[i].innerHTML = dictKeys[i] || "";
     }
 
     let randomizeTranslate = [];
-    while (randomizeTranslate.length < 5) {
-        let randomValue = Math.floor(Math.random() * 5);
+    while (randomizeTranslate.length < coupleRight.length && randomizeTranslate.length < dictKeys.length) {
+        let randomValue = Math.floor(Math.random() * dictKeys.length);
         if (!randomizeTranslate.includes(randomValue)) {
             randomizeTranslate.push(randomValue);
         }
     }
-    for (var i = 0; i < coupleRight.length; i++) {
+
+    for (let i = 0; i < coupleRight.length; i++) {
+        coupleRight[i].removeEventListener("click", handleRightVariant);
         coupleRight[i].addEventListener("click", handleRightVariant);
         coupleRight[i].style.backgroundColor = "var(--bgc_card)";
-        coupleRight[i].innerHTML = dictionaryFromFindCouple[Object.keys(dictionaryFromFindCouple)[randomizeTranslate[i]]][1][Math.floor(Math.random() * this.length)];
+        
+        if (dictKeys[randomizeTranslate[i]]) {
+            let key = dictKeys[randomizeTranslate[i]];
+            let transList = dictionaryFromFindCouple[key][1];
+            coupleRight[i].innerHTML = transList[Math.floor(Math.random() * transList.length)];
+        } else {
+            coupleRight[i].innerHTML = "";
+        }
     }
 }
-
-/* Поиск пары*/
-
