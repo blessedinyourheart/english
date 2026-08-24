@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EnglishEasy</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div class="wrapper">
+        <header class="header">
+        </header>
+        <div class="content">
+            <div class="img__bg">
+                <div class="cards">
+                    <div id="main-word" class="main-word">
+                        <div class="front" id="front">
+                            <p class="word" id="word">Let's begin to learn English</p>
+                            <p class="transcription" id="transcription">together</p>
+                        </div>
+                        <div class="back" id="back">
+                            <p class="word-translate" id="word-translate">Почнімо вчити англійську мову разом</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="inteactive_module">
+                <div class="btn_next" id="next-word">
+                    <p>ВИПАДКОВЕ СЛОВО</p>
+                </div>
+
+                <div class="canvas_test hidden" id="canvas_test">
+                    <div class="variants" id="variants">
+                        <div class="option" id="var_one">Варіант 1</div>
+                        <div class="option" id="var_two">Варіант 2</div>
+                        <div class="option" id="var_three">Варіант 3</div>
+                        <div class="option" id="var_four">Варіант 4</div>
+                    </div>
+                    <div class="apply_variants" id="apply_variants">ПЕРЕВІРИТИ</div>
+                </div>
+
+                <div class="canvas_test_couple hidden" id="canvas_test_couple">
+                    <div class="find_couple_original" id="find_couple_original">
+                        <div class="couple_left" id="left_one"></div>
+                        <div class="couple_left" id="left_two"></div>
+                        <div class="couple_left" id="left_three"></div>
+                        <div class="couple_left" id="left_four"></div>
+                        <div class="couple_left" id="left_five"></div>
+                    </div>
+                    <div class="find_couple_translate" id="find_couple_translate">
+                        <div class="couple_right" id="right_one"></div>
+                        <div class="couple_right" id="right_two"></div>
+                        <div class="couple_right" id="right_three"></div>
+                        <div class="couple_right" id="right_four"></div>
+                        <div class="couple_right" id="right_five"></div>
+                    </div>
+                </div>
+                <div class="canvas_test_input hidden" id="canvas_test_input">
+
+                </div>
+                <div class="setting_menu hidden" id="setting_menu">
+
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="navigation">
+                <ul>
+                    <li class="list active" style="--clr:#191D40">
+                        <a href="#">
+                            <span class="icon" id="learn_word">
+                                <ion-icon name="home-outline"></ion-icon>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="list" style="--clr:#191D40">
+                        <a href="#">
+                            <span class="icon" id="mode_test">
+                                <ion-icon name="book-outline"></ion-icon>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="list" style="--clr:#191D40">
+                        <a href="#">
+                            <span class="icon" id="mode_couple">
+                                <ion-icon name="bookmarks-outline"></ion-icon>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="list" style="--clr:#191D40">
+                        <a href="#">
+                            <span class="icon" id="mode_input">
+                                <ion-icon name="chatbox-ellipses-outline"></ion-icon>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="list" style="--clr:#191D40">
+                        <a href="#">
+                            <span class="icon" id="setting_btn">
+                                <ion-icon name="settings-outline"></ion-icon>
+                            </span>
+                        </a>
+                    </li>
+                    <div class="indicator">
+
+                    </div>
+                </ul>
+            </div>
+        </footer>
+    </div>
+
+    <script src="main.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>
+    
